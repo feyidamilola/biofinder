@@ -1,0 +1,128 @@
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+}
+
+/* Flip around the padding for proper display in narrow viewports */
+.navbar-wrapper > .container {
+  padding-right: 0;
+  padding-left: 0;
+}
+.navbar-wrapper .navbar {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.navbar-wrapper .navbar .container {
+  width: auto;
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  height: 75vh;
+  margin-bottom: 15px;
+  margin-top: 65px;
+}
+
+.carousel-caption {
+  z-index: 10;
+  left: 0%;
+  right: 0%;
+  /* max-width: 100%; */
+  text-shadow: none;
+  /* bottom: 7%; */
+  /* position: relative; */
+  /* margin-top: 11%; */
+  overflow: hidden;
+  top: 30%;
+  /* bottom: 0; */
+  width: 50%;
+  margin: 0px auto;
+  /* background: #0000008c; */
+  height: auto;
+}
+.carousel-caption-inner {
+  box-shadow: 0 8px 14px 0 rgba(18, 85, 100, 0.16);
+  background: rgba(0,0,0,0.5);
+  padding: 20px 0 5px;
+}
+.carousel .item {
+  height: 75vh;
+}
+
+.carousel-caption h1,
+.product-feature h1 {
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 800;
+  margin-top: 0px;
+  margin-bottom: 30px;
+  line-height: 1.7
+}
+
+
+.carousel-indicators {
+  bottom: 0px;
+}
+
+.carousel-indicators li {
+  width: 50px;
+  height: 7px;
+  background-color: #71d2e8;
+  border: 0;
+  border-radius: 0;
+  margin-right: 30px;
+  transition: all 0.9s;
+}
+.carousel-indicators .active {
+  width: 50px;
+  height: 7px;
+  margin: 0;
+  background-color: #23a743;
+  border-radius: 0;
+  margin-right: 30px;
+}
+
+.carousel-caption-bottom {
+  text-align: left;
+  position: absolute;
+  bottom: -80px
+}
+.carousel-caption a {
+  margin-right: 20px;
+}
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+  .navbar-wrapper .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .navbar-wrapper .navbar {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  
+}
