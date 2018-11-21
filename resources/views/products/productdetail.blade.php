@@ -26,28 +26,10 @@
     <input type="hidden" name="price" id="price" value="{{ $productdetail->price }}" />
       <div class="full-width product-feature">
         <div class="container">
-          <div class="col-md-6">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-              <!-- Indicators -->
-              <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                {{-- <li data-target="#myCarousel" data-slide-to="1"></li> --}}
-              </ol>
-              <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                  <div class="container">
-                    <div class="carousel-caption" style="position: absolute;">
-                      <div class="">
-                        <img src="{{ asset('/images/backend_images/bioproducts/medium/'.$productdetail->image) }}" alt="{{$productdetail->product_name}}">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
+          <div class="col-md-5 text-center">
+             <img src="{{ asset('/images/backend_images/bioproducts/medium/'.$productdetail->image) }}" alt="{{$productdetail->product_name}}" width="100%">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-7">
               <div class="breadcrumb">
                 <ul>
                   <li>
