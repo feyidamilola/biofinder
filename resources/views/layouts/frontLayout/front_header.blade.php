@@ -1,4 +1,6 @@
-
+@php
+    $url = url()->current();
+@endphp
 <body>
     <nav class="navbar navbar-fixed-top">
       <div class="container">
@@ -16,8 +18,8 @@
         <div id="navbar" class="collapse navbar-collapse col-md-10">
           <ul class="nav navbar-nav">
             <li class="active"><a href="{{ url('/')}}">Home</a></li>
-            <li><a href="{{ url('/products')}}">products</a></li>
-            <li>
+            <li <?php if (preg_match("/products/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/products')}}">products</a></li>
+            <li <?php if (preg_match("/vendor/", $url)) { ?>  class="active" <?php } ?>>
                 <a href="#" class="dropdown-toggle quote" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">vendors</a>
                 <ul class="dropdown-menu">
                   <li>
@@ -47,7 +49,7 @@
             </li>
 
             {{-- <li><a href="#"><i class="fa fa-user"></i></a></li> --}}
-            <li><a href="{{ url('/login-register')}}">Login/Register</a></li>
+            <li <?php if (preg_match("/login/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/login-register')}}">Login/Register</a></li>
           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->
