@@ -14,7 +14,7 @@ class UsersController extends Controller
             $data = $request->all();
 
             // check if user exists
-            $userCount = User::where('email', $data['email'])->count();
+            $userCount = User::where('email', $data['email-add'])->count();
             if($userCount > 0) {
                 return back()->with('flash_message_error', 'Email account already exists');
             } else {
@@ -22,5 +22,19 @@ class UsersController extends Controller
             }
         }
         return view('users.login');
+    }
+
+    public function checkEmail(Request $request)  {
+        if($request->isMethod('post')) {
+            $data = $request->all();
+
+            // check if user exists
+            $userCount = User::where('email', $data['email-add'])->count();
+            if($userCount > 0) {
+                return back()->with('flash_message_error', 'Email account already exists');
+            } else {
+                echo 'success'; die;
+            }
+        }
     }
 }

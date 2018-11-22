@@ -109,3 +109,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // User path
 Route::match(['get', 'post'], '/login-register', 'UsersController@register');
+// Check if user email currenty exists
+Route::match(['get', 'post'], '/check-email', 'UsersController@checkEmail');

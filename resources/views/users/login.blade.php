@@ -24,13 +24,13 @@
                     <div class="control-group">
                         <label class="control-label">Email</label>
                         <div class="controls">
-                            <input type="email" name="email" id="email">
+                            <input type="email" name="" id="">
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Password</label>
                         <div class="controls">
-                            <input type="password" name="password" id="password">
+                            <input type="password" name="password1" id="password1">
                         </div>
                     </div>
                     <div class="control-group">
@@ -62,7 +62,7 @@
                     <div class="control-group">
                         <label class="control-label">Email Address</label>
                         <div class="controls">
-                            <input type="email" name="email" id="email">
+                            <input type="email" name="email-add" id="email-add">
                         </div>
                     </div>
                     <div class="control-group">
