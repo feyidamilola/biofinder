@@ -46,7 +46,8 @@
               </ul>
             </li>
 
-            <li><a href="#"><i class="fa fa-user"></i></a></li>
+            {{-- <li><a href="#"><i class="fa fa-user"></i></a></li> --}}
+            <li><a href="{{ url('/login-register')}}">Login/Register</a></li>
           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->

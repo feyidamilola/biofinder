@@ -106,3 +106,6 @@ Route::match(['get','post'], '/get-quote', 'QuotesController@newQuote');
 // Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// User path
+Route::match(['get', 'post'], '/login-register', 'UsersController@register');
