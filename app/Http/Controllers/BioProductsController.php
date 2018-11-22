@@ -81,7 +81,7 @@ class BioProductsController extends Controller
         }
 
         $categories = Subcategories::get();
-        $vendors = Vendor::get('enable', 1);
+        $vendors = Vendor::where('enable', 1)->get();
 
         return view('admin.bioproducts.create_bioproduct')->with(compact('categories','vendors'));
     }
