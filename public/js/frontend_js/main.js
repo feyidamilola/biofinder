@@ -35,7 +35,30 @@ $().ready(function(){
 				remote: "Email already exists"
 			}
 		}
-	})
+	});
+
+	$('#loginForm').validate({
+		rules:{
+			
+			password: {
+				required:true
+			},
+			email: {
+				required: true,
+				email: true
+			}
+		},
+		messages: {
+			
+			password: {
+				required: "Please provide your password"
+			},
+			email: {
+				required: "Email address is required",
+				email: "Please enter a valid email address"
+			}
+		}
+	});
 }) ;
 
 
