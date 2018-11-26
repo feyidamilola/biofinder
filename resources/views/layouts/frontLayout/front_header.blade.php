@@ -48,8 +48,40 @@
               </ul>
             </li>
 
-            {{-- <li><a href="#"><i class="fa fa-user"></i></a></li> --}}
-            <li <?php if (preg_match("/login/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/login-register')}}">Login/Register</a></li>
+            
+            @if (empty(Auth::check()))
+              <li <?php if (preg_match("/login/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/login-register')}}">Login/Register</a></li>
+            @else
+              <li><a href="#"></a></li>
+              <li>
+                <a href="#" class="dropdown-toggle quote" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-user"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#">
+                        <i class="fa fa-user"></i> Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                        <i class="fa fa-shopping-cart"></i>  Orders
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                        <i class="fa fa-pencil"></i>  Reviews
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ url('/user-logout')}}">
+                      <i class="fa fa-sign-out"></i>  LogOut
+                    </a>
+                  </li>
+                </ul>
+            </li>
+            @endif
+            
           </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->

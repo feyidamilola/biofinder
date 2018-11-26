@@ -19,12 +19,12 @@
         <div class="col-md-5 col-sm-12 ">
             <h3 class="text-center">login </h3>
             <div class="register ">
-              <form class="form-horizontal" method="post" action="#" name="loginForm" id="loginForm" novalidate="novalidate">
+              <form class="form-horizontal" method="post" action="{{url('/user-login')}}" name="loginForm" id="loginForm" novalidate="novalidate">
                   {{ csrf_field() }}
                     <div class="control-group">
                         <label class="control-label">Email</label>
                         <div class="controls">
-                            <input type="email" name="" id="">
+                            <input type="email" name="email" id="email">
                         </div>
                     </div>
                     <div class="control-group">
@@ -35,9 +35,9 @@
                     </div>
                     <div class="control-group">
                         {{-- <label class="control-label">Status</label> --}}
-                        <div class="controls">
+                        {{-- <div class="controls">
                             <input type="checkbox" name="remember[]" id="remember"> Remember Me
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="form-actions">
                         <input type="submit" value="Login" class="btn btn-success">
@@ -51,7 +51,7 @@
         <div class="col-md-5 col-sm-12 ">
             <h3 class="text-center">New to Biofinder? SignUp </h3>
             <div class="register ">
-                <form class="form-horizontal" method="post" action="{{url('/login-register')}}" name="registerForm" id="registerForm" novalidate="novalidate">
+                <form class="form-horizontal" method="post" action="{{url('/user-register')}}" name="registerForm" id="registerForm" novalidate="novalidate">
                     {{ csrf_field() }}
                     <div class="control-group">
                         <label class="control-label">Name</label>
@@ -76,7 +76,6 @@
                     </div>
                 </form>
             </div>
-         
         </div>
     </div>
 @endsection

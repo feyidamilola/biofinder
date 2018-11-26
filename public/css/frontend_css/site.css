@@ -71,6 +71,7 @@ option {
     box-shadow: 0 8px 10px 0 rgba(18, 85, 100, 0.16);
     padding: 0;
     border-radius: 0;
+    left: -30px;
 }
 .navbar-nav>li>.dropdown-menu li,
 .navbar-nav>li>.dropdown-menu li:hover {
