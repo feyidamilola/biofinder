@@ -52,14 +52,14 @@
             @if (empty(Auth::check()))
               <li <?php if (preg_match("/login/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/login-register')}}">Login/Register</a></li>
             @else
-              <li><a href="#"></a></li>
+              <li><a href="{{ url('/cart')}}"><i class="fa fa-shopping-cart"></i></a></li>
               <li>
                 <a href="#" class="dropdown-toggle quote" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-user"></i>
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="#">
+                    <a href="{{ url('/profile')}}">
                         <i class="fa fa-user"></i> Profile
                     </a>
                   </li>

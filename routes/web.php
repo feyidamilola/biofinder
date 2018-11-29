@@ -116,4 +116,8 @@ Route::get('/user-logout', 'UsersController@userlogout');
 // Check if user email currenty exists
 Route::match(['get', 'post'], '/check-email', 'UsersController@checkEmail');
 
-Route::match(['get', 'post'], '/profile', 'UsersController@userProfile');
+Route::group (['middleware' => ['FrontLogin']], function(){
+	Route::match(['get', 'post'], '/profile', 'UsersController@userProfile');
+});
+
+

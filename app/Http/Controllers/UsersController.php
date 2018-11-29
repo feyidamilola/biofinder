@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Session;
 
 use App\User;
 
@@ -29,7 +30,8 @@ class UsersController extends Controller
                 $user->password = bcrypt($data['password']);
                 $user->save(); 
                 if(Auth::attempt(['email'=>$data['email-add'],'password'=>$data['password']])) {
-                    return redirect('/cart');
+                    Session::put('frontSession', $data['email']);
+                    return redirect('/profile');
                 }
             }
         }
@@ -55,14 +57,21 @@ class UsersController extends Controller
             $data = $request->all();
 
             if(Auth::attempt(['email' =>$data['email'], 'password' => $data['password1']])) {
+                Session::put('frontSession', $data['email']);
                 return redirect('/cart');
             } else {
                 return back()->with('flash_message_error', 'Invalid Email Address or Password');
             }
         }
     }
+
+    public function userProfile() {
+        return view('users.profile');
+    }
+
     public function userlogout(){
         Auth::logout();
+        Session::forget('frontSession');
         return redirect('/');
     }
 }
