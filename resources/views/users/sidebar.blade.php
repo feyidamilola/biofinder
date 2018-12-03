@@ -9,7 +9,7 @@
             <i class="fa fa-user"></i> Profile
         </a>
 
-        <a href="{{ url('/password')}}" <?php if (preg_match("/password/", $url)) { ?>  class="active" <?php } ?>>
+        <a href="{{ url('/update-password')}}" <?php if (preg_match("/password/", $url)) { ?>  class="active" <?php } ?>>
             <i class="fa fa-cog"></i> Password
         </a>
     

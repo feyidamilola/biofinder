@@ -20,61 +20,42 @@
     <div class="col-md-9">
       <!-- user -->
         <div class="full-width overflow user-profile">
-            <form class="form-horizontal" method="post" action="{{url('/profile')}}" name="profile" id="profile" novalidate="novalidate">
+            <form class="form-horizontal" method="post" action="{{url('/update-password')}}" name="update-password" id="update-password" novalidate="novalidate">
                 {{ csrf_field() }}
                 <div class="control-group col-md-12">
                     <div class="col-md-3">
-                        <label class="control-label">Name</label>
+                        <label class="control-label">Current Password</label>
                     </div>
                     <div class="col-md-9">
                         <div class="controls">
-                            <input type="text" name="name" id="name" value="{{$userDetails->name}}">
+                            <input type="password" name="currentpassword" id="currentpassword" value="">
                         </div>
                     </div>
                 </div>
                 <div class="control-group col-md-12">
                     <div class="col-md-3">
-                        <label class="control-label">Phone Number</label>
+                        <label class="control-label">New Password</label>
                     </div>
                     <div class="col-md-9">
                         <div class="controls">
-                            <input type="tel" name="phone" id="phone" value="{{$userDetails->phone}}">
+                            <input type="password" name="password" id="password" value="">
                         </div>
                     </div>
                 </div>
                 <div class="control-group col-md-12">
                     <div class="col-md-3">
-                        <label class="control-label">Email Address</label>
+                        <label class="control-label">Confirm Password</label>
                     </div>
                     <div class="col-md-9">
                         <div class="controls">
-                            <input type="email" name="email" id="email" value="{{$userDetails->email}}">
+                            <input type="password" name="confirmpassword" id="confirmpassword" value="">
                         </div>
                     </div>
                 </div>
-                <div class="control-group col-md-12">
-                    <div class="col-md-3">
-                        <label class="control-label">Address</label>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="controls">
-                            <input type="text" name="address" id="address" value="{{$userDetails->address}}">
-                        </div>
-                    </div>
-                </div>
-                <div class="control-group col-md-12">
-                    <div class="col-md-3">
-                        <label class="control-label">State</label>
-                    </div>
-                    <div class="col-md-9">
-                        <div class="controls">
-                            <input type="text" name="state" id="state" value="{{$userDetails->state}}">
-                        </div>
-                    </div>
-                </div>
+                
                     
                 <div class="form-actions col-md-12">
-                    <input type="submit" value="update" class="btn btn-success">
+                    <input type="submit" value="update password" class="btn btn-success">
                 </div>
             </form>
         </div>

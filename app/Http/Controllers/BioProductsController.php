@@ -260,13 +260,21 @@ class BioProductsController extends Controller
             $data['user_id'] = 0;
         }
 
+        
+        
+        $session_id = Session::get('session_id');
+
+        if(empty('session_id')) {
+            $session_id = str_random(30);
+            Session::put('session_id', $session_id);
+        }
+
         $countCartContents = DB::table('cart')->where(['product_id' =>$data['product_id'],
                                    'product_name' =>$data['product_name'],
-                                   'session_id' =>  $_COOKIE['session_id']
+                                   'session_id' =>  $session_id
                                    ])->count();
-        
 
-        if($_COOKIE['session_id']){
+        if(empty('session_id')){
             if ($countCartContents > 0) {
                 return back()->with('flash_message_error', 'Product already exists in cart');
             } else {
@@ -282,14 +290,7 @@ class BioProductsController extends Controller
             return back()->with('flash_message_success','Product has been added to cart');
         }
         
-       
 
-        $cookievalue = str_random(40);
-        $cookietime = 525600;
-        // Cookie::queue('session_id', $cookievalue, $cookietime);
-        setcookie("session_id", $cookievalue);
-
-       
         if ($countCartContents > 0) {
             return back()->with('flash_message_error', 'Product already exists in cart');
         } else {
@@ -297,7 +298,7 @@ class BioProductsController extends Controller
                                    'product_name' =>$data['product_name'],
                                    'price' => $data['price'],
                                    'quantity' => $data['quantity'],
-                                   'session_id' =>  $cookievalue,
+                                   'session_id' =>  $session_id,
                                    'user_id' => $data['user_id']
                                    ]);
         }
@@ -307,7 +308,9 @@ class BioProductsController extends Controller
 
     // View Cart
     public function Cart() {
-        $session_id = $_COOKIE['session_id'];
+        // $session_id = $_COOKIE['session_id'];
+
+        $session_id = Session::get('session_id');
 
         // echo $session_id; die;
         $usercart = DB::table('cart')->where(['session_id' => $session_id])->get();
@@ -333,5 +336,8 @@ class BioProductsController extends Controller
         return back()->with('flash_message_success', 'Product quantity has been updated');
     }
     
+    public function checkout() {
+        return view('users.checkout');
+    }
 }
 

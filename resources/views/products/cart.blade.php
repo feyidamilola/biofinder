@@ -109,7 +109,7 @@
 					</table>
 					
 					<p class="pull-right margin-top-60">
-						<a href="{{url('/products')}}" class="butn btn-primary">
+						<a href="{{url('/checkout')}}" class="butn btn-primary">
 							Checkout
 						</a>
 
