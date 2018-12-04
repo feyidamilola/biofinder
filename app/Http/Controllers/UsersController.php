@@ -28,10 +28,14 @@ class UsersController extends Controller
                 $user = new User;
                 $user->name = $data['name'];
                 $user->email = $data['email-add'];
+                $user->address = '';
+                $user->state = '';
+                $user->phone = '';
+
                 $user->password = bcrypt($data['password']);
                 $user->save(); 
                 if(Auth::attempt(['email'=>$data['email-add'],'password'=>$data['password']])) {
-                    Session::put('frontSession', $data['email']);
+                    Session::put('frontSession', $data['email-add']);
                     return redirect('/profile');
                 }
             }
@@ -118,6 +122,7 @@ class UsersController extends Controller
         }
         return view('/users.password');
     }
+    
     public function userlogout(){
         Auth::logout();
         Session::forget('frontSession');

@@ -15,6 +15,7 @@ use App\SubCategories;
 use App\ParentCategory;
 use App\Vendor;
 use App\BioProduct;
+use App\User;
 
 
 
@@ -251,57 +252,41 @@ class BioProductsController extends Controller
     // add to cart
     public function AddtoCart(Request $request) {
         $data = $request->all();
-
+        // echo print_r($data); die;
+        
         if(empty($data['quantity'])) {
             return back()->with('flash_message_error','You did not enter the quantity you want');
-        } 
+        }
 
         if(empty($data['user_id'])) {
             $data['user_id'] = 0;
         }
 
-        
-        
         $session_id = Session::get('session_id');
 
-        if(empty('session_id')) {
+        if(empty($session_id)) {
             $session_id = str_random(30);
             Session::put('session_id', $session_id);
         }
 
-        $countCartContents = DB::table('cart')->where(['product_id' =>$data['product_id'],
-                                   'product_name' =>$data['product_name'],
-                                   'session_id' =>  $session_id
-                                   ])->count();
-
-        if(empty('session_id')){
-            if ($countCartContents > 0) {
-                return back()->with('flash_message_error', 'Product already exists in cart');
-            } else {
-                DB::table('cart')->insert(['product_id' =>$data['product_id'],
-                                   'product_name' =>$data['product_name'],
-                                   'price' => $data['price'],
-                                   'quantity' => $data['quantity'],
-                                   'session_id' =>  $_COOKIE['session_id'],
-                                   'user_id' => $data['user_id']
-                                   ]);
-            }
-            
-            return back()->with('flash_message_success','Product has been added to cart');
-        }
+        $countProducts = DB::table('cart')->where(['product_id'=>$data['product_id'],
+                                                    'product_name'=>$data['product_name'],
+                                                    'session_id'=>$session_id
+                                                    ])->count();
         
-
-        if ($countCartContents > 0) {
-            return back()->with('flash_message_error', 'Product already exists in cart');
+        if($countProducts > 0) {
+            return back()->with('flash_message_error','Product already exists in your cart');
         } else {
-            DB::table('cart')->insert(['product_id' =>$data['product_id'],
-                                   'product_name' =>$data['product_name'],
-                                   'price' => $data['price'],
-                                   'quantity' => $data['quantity'],
-                                   'session_id' =>  $session_id,
-                                   'user_id' => $data['user_id']
-                                   ]);
+            DB::table('cart')->insert(['product_id'=>$data['product_id'],
+                                  'product_name'=>$data['product_name'],
+                                  'session_id'=>$session_id,
+                                  'user_id'=>$data['user_id'],
+                                  'quantity'=>$data['quantity'],
+                                  'price'=>$data['price']
+                                  ]);
         }
+
+        
         
         return back()->with('flash_message_success','Product has been added to cart');
     }
@@ -336,8 +321,27 @@ class BioProductsController extends Controller
         return back()->with('flash_message_success', 'Product quantity has been updated');
     }
     
-    public function checkout() {
-        return view('users.checkout');
+    public function checkout(Request $request) {
+        $user_id = Auth::user()->id;
+        $userDetails = User::find($user_id);
+
+        $session_id = Session::get('session_id');
+
+        // echo $session_id; die;
+        $usercart = DB::table('cart')->where(['session_id' => $session_id])->get();
+
+        foreach($usercart as $key => $product) {
+            // echo $product->product_id; die;
+            $productdetails = BioProduct::where('id', $product->product_id)->first();
+            $usercart[$key]->image = $productdetails->image;
+            
+        }
+
+        if($request->isMethod('post')) {
+            $data = $request->all();
+            echo "<pre>"; print_r($data); die;
+        }
+        return view('users.checkout')->with(compact('userDetails','usercart'));
     }
 }
 

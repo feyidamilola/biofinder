@@ -16,7 +16,8 @@
     padding: 15px;
 }
 
-.register form input[type=checkbox]{
+.register form input[type=checkbox],
+.register form input[type=radio]{
     width: 20px;
     float: left;
     min-height: 15px;
