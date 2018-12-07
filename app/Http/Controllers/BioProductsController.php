@@ -16,6 +16,7 @@ use App\ParentCategory;
 use App\Vendor;
 use App\BioProduct;
 use App\User;
+use App\Order;
 
 
 
@@ -322,26 +323,51 @@ class BioProductsController extends Controller
     }
     
     public function checkout(Request $request) {
+
         $user_id = Auth::user()->id;
         $userDetails = User::find($user_id);
 
         $session_id = Session::get('session_id');
 
-        // echo $session_id; die;
         $usercart = DB::table('cart')->where(['session_id' => $session_id])->get();
 
         foreach($usercart as $key => $product) {
-            // echo $product->product_id; die;
             $productdetails = BioProduct::where('id', $product->product_id)->first();
-            $usercart[$key]->image = $productdetails->image;
-            
+            $usercart[$key]->image = $productdetails->image;            
         }
+
+        DB::table('cart')->where(['session_id'=>$session_id])->update(['user_id'=> $user_id]);
 
         if($request->isMethod('post')) {
             $data = $request->all();
-            echo "<pre>"; print_r($data); die;
+
+            if(empty($data['address']) || empty($data['state']) || empty($data['phone'])) {
+                return back()->with('flash_message_error','Please enter your details to continue');
+            }
+
+            // Update user details
+            User::where('id', $user_id)->update(['name'=>$data['name'],
+                                                'address'=>$data['address'],
+                                                'state'=>$data['state'],
+                                                'phone'=>$data['phone']
+                                                ]);
+
+            $order = new Order;
+            $order->user_id = $user_id;
+            $order->payment = $data['payment'];
+            $order->delivery = $data['delivery'];
+            $order->additional_info = $data['additional_info'];
+            $order->totalamount = $data['totalamount'];
+
+            $order->save();
         }
+        
+        $cartdetails = DB::table('cart')->where(['user_id' => $user_id])->get();
+        echo "<pre>"; print_r($cartdetails); die;
+        
         return view('users.checkout')->with(compact('userDetails','usercart'));
     }
+
+
 }
 

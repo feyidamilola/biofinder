@@ -102,6 +102,7 @@
 										&#8358;@php
 										echo $totalamount;
 									@endphp
+									
 								</td>
 								<td></td>
 							</tr>
