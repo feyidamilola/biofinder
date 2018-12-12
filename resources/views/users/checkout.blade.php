@@ -20,7 +20,7 @@
         <div class="col-md-7 col-sm-12 ">
             
             <div class="register ">
-                <form class="form-horizontal" method="post" action="{{url('/checkout')}}" name="checkout" id="checkout" novalidate="novalidate">
+                <form class="form-horizontal" method="post" action="{{url('/checkout')}}" id="checkout" novalidate="novalidate">
                     {{ csrf_field() }}
                     <h3 class="text-center">Delivery Details </h3>
                     <div class="control-group">
@@ -50,24 +50,20 @@
                     <hr class="full-width">
                     <h3 class="text-center">Delivery Method </h3>
                     <div class="control-group">
-                        <div class="controls" style="margin-bottom: 25px">
-                            <input type="radio" name="delivery" id="delivery" value="pickup" checked> Pickup
-                        </div>
-                        <div class="controls">
-                            <input type="radio" name="delivery" id="delivery" value="shipping"> Shipping (1,500 flat rate)
-                        </div>
+                        <select name="delivery" id="">
+                            <option value="shipping">Shipping (1,500naira flat rate)</option>
+                            <option value="pickup">Pickup</option>
+                        </select>
                     </div>
                     <hr class="full-width">
                     
                     <div class=" ">
                         <h3 class="text-center">Payment Method </h3>
                         <div class="control-group">
-                            <div class="controls" style="margin-bottom: 25px">
-                                <input type="radio" name="payment" id="payment" value="cash" checked> Cash on Delivery
-                            </div>
-                            <div class="controls">
-                                <input type="radio" name="payment" id="payment" value="transfer"> Online Transfer
-                            </div>
+                            <select name="payment" id="">
+                                <option value="cash">Cash on delivery</option>
+                                <option value="online">Online Transfer</option>
+                            </select>
                         </div>
                         
                     </div>
@@ -154,7 +150,7 @@
 				@endif
           	</div>
         </div>
-       <div class="col-md-12 margin-top-30">
+       <div class="col-md-12 padding-top-30">
             <div class="form-actions">
                 <input type="submit" value="Checkout" class="btn btn-success">
             </div>

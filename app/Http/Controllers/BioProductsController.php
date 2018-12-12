@@ -79,7 +79,7 @@ class BioProductsController extends Controller
             $product->status = $status;
             $product->save();
             
-            return redirect()->back()->with('flash_message_success', 'Product has been created successsfully');
+            return back()->with('flash_message_success', 'Product has been created successsfully');
         }
 
         $categories = Subcategories::get();
@@ -193,7 +193,7 @@ class BioProductsController extends Controller
                 array_push($productdetails, $productdetail);
             }
             if(count($productdetails) > 3) {
-               return redirect()->back()->with('flash_message_error','You cannot compare more than 3 products');
+               return back()->with('flash_message_error','You cannot compare more than 3 products');
             }
 
             return view('products.compare')->with(compact('productdetails'));
@@ -323,14 +323,15 @@ class BioProductsController extends Controller
     }
     
     public function checkout(Request $request) {
-
         $user_id = Auth::user()->id;
+        $user_email = Auth::user()->email;
+       
         $userDetails = User::find($user_id);
-
+        
         $session_id = Session::get('session_id');
 
         $usercart = DB::table('cart')->where(['session_id' => $session_id])->get();
-
+       
         foreach($usercart as $key => $product) {
             $productdetails = BioProduct::where('id', $product->product_id)->first();
             $usercart[$key]->image = $productdetails->image;            
@@ -341,33 +342,42 @@ class BioProductsController extends Controller
         if($request->isMethod('post')) {
             $data = $request->all();
 
-            if(empty($data['address']) || empty($data['state']) || empty($data['phone'])) {
-                return back()->with('flash_message_error','Please enter your details to continue');
+            if(empty($data['additional_info'])) {
+                $additional_info = '';
+            } else {
+                $additional_info = $data['additional_info'];
             }
-
-            // Update user details
-            User::where('id', $user_id)->update(['name'=>$data['name'],
-                                                'address'=>$data['address'],
-                                                'state'=>$data['state'],
-                                                'phone'=>$data['phone']
-                                                ]);
 
             $order = new Order;
             $order->user_id = $user_id;
+            $order->user_email = $user_email;
             $order->payment = $data['payment'];
-            $order->delivery = $data['delivery'];
-            $order->additional_info = $data['additional_info'];
-            $order->totalamount = $data['totalamount'];
-
+            $order->delivery = $data['delivery']; 
+            $order->additional_info = $additional_info;
             $order->save();
+
+            return redirect()->action('BioProductsController@OrderReview');
         }
-        
-        $cartdetails = DB::table('cart')->where(['user_id' => $user_id])->get();
-        echo "<pre>"; print_r($cartdetails); die;
-        
-        return view('users.checkout')->with(compact('userDetails','usercart'));
+
+        return view('users.checkout')->with(compact('userDetails', 'usercart'));
     }
 
+    public function OrderReview() {
+        $user_id = Auth::user()->id;
+        $userDetails = User::where('id', $user_id)->first();
+        $userDetails = json_decode(json_encode($userDetails));
+        $orderDetails = Order::where('user_id', $user_id)->first();
 
+        $session_id = Session::get('session_id');
+
+        $usercart = DB::table('cart')->where(['session_id' => $session_id])->get();
+
+        foreach($usercart as $key => $product) {
+            $productdetails = BioProduct::where('id', $product->product_id)->first();
+            $usercart[$key]->image = $productdetails->image;            
+        }
+
+        return view('products.review')->with(compact('userDetails', 'orderDetails', 'usercart'));
+    }
 }
 

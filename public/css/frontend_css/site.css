@@ -178,11 +178,17 @@ option {
 .margin-top-60 {
 	margin-top: 60px;
 }
+.margin-top-25 {
+	margin-top: 25px;
+}
 .padding-bottom-250 {
     padding-bottom: 250px;
 }
 .padding-bottom-150 {
     padding-bottom: 150px;
+}
+.padding-top-30 {
+    padding-top: 30px;
 }
 .margin-bottom-30 {
     margin-bottom: 30px !important;
@@ -860,8 +866,10 @@ button.compare {
     padding: 10px;
 }
 
-.cart table tbody {
-    border-top: 10px solid #2096b0
+.cart table tbody,
+.order table {
+    border-top: 10px solid #2096b0;
+    width: 100%;
 
 }
 
@@ -869,8 +877,13 @@ button.compare {
     counter-reset: Serial;
 }
 
-.cart table td {
+.cart table td,
+.order td {
     padding: 10px;
+}
+
+.order td {
+    text-transform: capitalize;
 }
 
 .cart table tbody td:first-child:before {
