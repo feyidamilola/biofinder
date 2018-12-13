@@ -22,12 +22,10 @@
     <div class="container margin-bottom-60">
         <div class="full-width">
             <div class="col-md-6">
-                <p class="pull-left margin-top-25">
-                    <a href="{{url('/cart')}}" class="butn btn-primary">
-                        Edit Cart
-                    </a>
-                </p>
-                <div class="cart">
+                <h2 class="title">
+                    Order Details <i class="fa fa-shopping-cart"></i>
+                </h2>
+                <div class="cart" style="margin-top: 10px">
                     @if (count($usercart) > 0)
                         <table width="100%">
                             <tbody>
@@ -110,7 +108,7 @@
             </div>
           	
 
-          	<div class="order col-md-6">
+          	<div class="order col-md-6" >
                 <div class="">
                     <h2 class="title">
                         Delivery Details <i class="fa fa-shopping-cart"></i>
@@ -162,16 +160,22 @@
                             Payment Method
                         </td>
                         <td>
-                            @if ($orderDetails->payment == 'online')
-                            @php
-                                echo 'Online Transfer';
-                            @endphp
-                            @endif
+                            <span>
+                                @if ($orderDetails->payment == 'online')
+                                    @php
+                                        echo 'Online Transfer';
+                                    @endphp
+                                    @else
+                                        @php
+                                            echo 'Cash on Delivery';
+                                        @endphp
+                                @endif
+                            </span>
                         </td>
                     </tr>
                 </table>
                 <p class="pull-right margin-top-25">
-                    <a href="{{url('/confirm-order')}}" class="butn btn-primary">
+                    <a href="{{url('/thank-you')}}" class="butn btn-primary">
                         Confirm Order
                     </a>
                 </p>

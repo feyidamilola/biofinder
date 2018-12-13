@@ -121,6 +121,9 @@ Route::group (['middleware' => ['FrontLogin']], function(){
 	Route::match(['get', 'post'],'/update-password', 'UsersController@updatePassword');
 	Route::match(['get', 'post'], '/checkout', 'BioProductsController@Checkout');
 	Route::match(['get', 'post'], '/review', 'BioProductsController@OrderReview');
+	Route::get('/thank-you', 'BioProductsController@Thankyou');
+
+	Route::get('/user/orders', 'BioProductsController@userOrders');
 });
 
 

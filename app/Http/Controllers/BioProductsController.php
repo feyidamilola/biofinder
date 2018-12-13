@@ -17,7 +17,7 @@ use App\Vendor;
 use App\BioProduct;
 use App\User;
 use App\Order;
-
+use App\OrderProduct;
 
 
 class BioProductsController extends Controller
@@ -295,11 +295,13 @@ class BioProductsController extends Controller
     // View Cart
     public function Cart() {
         // $session_id = $_COOKIE['session_id'];
-
-        $session_id = Session::get('session_id');
-
-        // echo $session_id; die;
-        $usercart = DB::table('cart')->where(['session_id' => $session_id])->get();
+        if(Auth::check()) {
+            $user_id = Auth::User()->id;
+            $usercart = DB::table('cart')->where(['user_id' => $user_id])->get();
+        } else {
+            $session_id = Session::get('session_id');
+            $usercart = DB::table('cart')->where(['session_id' => $session_id])->get();
+        }
 
         foreach($usercart as $key => $product) {
             // echo $product->product_id; die;
@@ -330,7 +332,7 @@ class BioProductsController extends Controller
         
         $session_id = Session::get('session_id');
 
-        $usercart = DB::table('cart')->where(['session_id' => $session_id])->get();
+        $usercart = DB::table('cart')->where(['user_id' => $user_id])->get();
        
         foreach($usercart as $key => $product) {
             $productdetails = BioProduct::where('id', $product->product_id)->first();
@@ -348,13 +350,35 @@ class BioProductsController extends Controller
                 $additional_info = $data['additional_info'];
             }
 
+            if($data['delivery'] == 'shipping') {
+                $totalamount = $data['totalamount'] + 1500;
+            } else {
+                $totalamount = $data['totalamount'];
+            }
             $order = new Order;
             $order->user_id = $user_id;
             $order->user_email = $user_email;
             $order->payment = $data['payment'];
             $order->delivery = $data['delivery']; 
+            $order->totalamount = $totalamount;
+            $order->status = "New";
             $order->additional_info = $additional_info;
             $order->save();
+
+            $order_id = str_random(10);
+            $cartProducts = DB::table('cart')->where(['user_id' => $user_id])->get();
+            foreach ($cartProducts as $cartProduct) {
+                $cartProductOrder = new OrderProduct;
+                $cartProductOrder->order_id = $order_id;
+                $cartProductOrder->user_id = $user_id;
+                $cartProductOrder->product_id = $cartProduct->product_id;
+                $cartProductOrder->product_name = $cartProduct->product_name;
+                $cartProductOrder->product_price = $cartProduct->price;
+                $cartProductOrder->product_qty = $cartProduct->quantity;
+                $cartProductOrder->save();
+
+                Session::put('order_id', $order_id);
+            }
 
             return redirect()->action('BioProductsController@OrderReview');
         }
@@ -362,15 +386,13 @@ class BioProductsController extends Controller
         return view('users.checkout')->with(compact('userDetails', 'usercart'));
     }
 
-    public function OrderReview() {
+    public function OrderReview(Request $request) {
         $user_id = Auth::user()->id;
         $userDetails = User::where('id', $user_id)->first();
         $userDetails = json_decode(json_encode($userDetails));
         $orderDetails = Order::where('user_id', $user_id)->first();
 
-        $session_id = Session::get('session_id');
-
-        $usercart = DB::table('cart')->where(['session_id' => $session_id])->get();
+        $usercart = DB::table('cart')->where(['user_id' => $user_id])->get();
 
         foreach($usercart as $key => $product) {
             $productdetails = BioProduct::where('id', $product->product_id)->first();
@@ -378,6 +400,16 @@ class BioProductsController extends Controller
         }
 
         return view('products.review')->with(compact('userDetails', 'orderDetails', 'usercart'));
+    }
+
+    public function Thankyou(Request $request) {
+        $user_id = Auth::User()->id;
+        DB::table('cart')->where(['user_id' => $user_id])->delete();
+        return view('products.thankyou');
+    }
+
+    public function userOrders() {
+        return view('users.orders');
     }
 }
 
