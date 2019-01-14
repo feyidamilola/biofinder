@@ -40,7 +40,8 @@
 
     <script src="{{ asset('js/frontend_js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/frontend_js/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('js/frontend_js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('js/frontend_js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('js/backend_js/jquery.dataTables.min.js') }} "></script> 
 	<script src="{{ asset('js/frontend_js/jquery.validate.js') }}"></script>
 	<script src="{{ asset('js/frontend_js/main.js') }}"></script>
     

@@ -8,6 +8,8 @@ use Session;
 use Hash;
 
 use App\User;
+use App\Order;
+use App\OrderProduct;
 
 class UsersController extends Controller
 {
@@ -122,7 +124,18 @@ class UsersController extends Controller
         }
         return view('/users.password');
     }
-    
+
+    public function userOrders() {
+        $user_id = Auth::user()->id;
+        $orderproducts = OrderProduct::where(['user_id' => $user_id])->get();
+
+        // $orderproducts = OrderProduct::get();
+        $orderproducts = json_decode(json_encode($orderproducts));
+        // echo "<pre>"; print_r($orderproducts); die;
+        
+        return view('users.orders')->with(compact('orderproducts'));
+    }
+
     public function userlogout(){
         Auth::logout();
         Session::forget('frontSession');

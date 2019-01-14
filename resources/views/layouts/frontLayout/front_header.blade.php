@@ -47,12 +47,13 @@
                 </form>
               </ul>
             </li>
+            <li><a href="{{ url('/cart')}}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 
             
             @if (empty(Auth::check()))
               <li <?php if (preg_match("/login/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/login-register')}}">Login/Register</a></li>
             @else
-              <li><a href="{{ url('/cart')}}"><i class="fa fa-shopping-cart"></i></a></li>
+              <li><a href="{{ url('/checkout')}}"><i class="fa fa-cog"></i> Checkout</a></li>
               <li>
                 <a href="#" class="dropdown-toggle quote" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                   <i class="fa fa-user"></i>
@@ -64,7 +65,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="{{ url('/orders')}}">
                         <i class="fa fa-shopping-cart"></i>  Orders
                     </a>
                   </li>

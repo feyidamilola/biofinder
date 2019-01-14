@@ -1605,7 +1605,7 @@ div.dataTables_wrapper .ui-widget-header {
 .table-counter {
 	counter-reset: Serial;
 }
-tbody tr td:first-child:before
+tbody.table-counter tr td:first-child:before
 {
   counter-increment: Serial;      /* Increment the Serial counter */
   content: counter(Serial); /* Display the counter */
@@ -1637,4 +1637,12 @@ tbody tr td:first-child:before
 
 .details:first-child {
 	padding-top: 0;
+}
+.modal-body tbody {
+    border-bottom: 1px solid #808080;
+    border-top: 1px solid #808080;
+}
+
+.modal-body table td {
+	padding: 10px 0;
 }

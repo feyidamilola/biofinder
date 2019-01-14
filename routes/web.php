@@ -58,6 +58,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 	Route::match(['get','post'],'/admin/edit-product/{url}','BioProductsController@editBioProduct');
 	Route::get('/admin/delete-product-image/{id}','BioProductsController@deleteBioProductImage');
 
+	// All Orders
+	Route::match(['get','post'], '/admin/orders', 'BioProductsController@allorders');
+
 	// Admin route for services
 	Route::match(['get','post'], '/admin/create-service', 'ServicesController@createService');
 	Route::get('/admin/all-services', 'ServicesController@viewService');
@@ -73,6 +76,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 	// All quotes
 	Route::get('/admin/quotes', 'QuotesController@allQuotes');
 
+	
 // });
 
 Route::post('/admin/login' , 'AdminController@login');
@@ -122,8 +126,7 @@ Route::group (['middleware' => ['FrontLogin']], function(){
 	Route::match(['get', 'post'], '/checkout', 'BioProductsController@Checkout');
 	Route::match(['get', 'post'], '/review', 'BioProductsController@OrderReview');
 	Route::get('/thank-you', 'BioProductsController@Thankyou');
-
-	Route::get('/user/orders', 'BioProductsController@userOrders');
+	Route::get('/orders', 'UsersController@userOrders');
 });
 
-
+Route::get('/send','EmailController@send');

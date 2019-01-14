@@ -230,6 +230,32 @@ class BioProductsController extends Controller
         return view('products.allproducts')->with(compact('bioproducts', 'category_name', 'vendors', 'subcategories'));
     }
 
+    public function allorders(Request $request){
+        $orders = Order::get();
+        foreach ($orders as $key) {
+            $orderproducts = OrderProduct::where("order_id",$key->order_id)->get();
+            
+            foreach($orderproducts as $key) {
+                $vendors = Bioproduct::where('id', $key->product_id)->get();
+            }
+            $userdetails = User::where('id', $key->user_id)->get();
+        }
+
+        if($request->isMethod('post')) {
+            $data = $request->all();
+
+            $orderstatus = $data['order_status'];
+            $order_id = $data['order_id'];
+            
+            OrderProduct::where(['order_id' => $order_id])->update(['status' => $orderstatus]);
+            Order::where(['order_id' => $order_id])->update(['status' => $orderstatus]);
+            return back()->with('flash_message_success', 'Your order has been updated');
+
+        }
+       
+        return view('admin.bioproducts.all_orders')->with(compact('orders','orderproducts', 'userdetails','vendors'));
+    }
+
     // Search
     public function Search(Request $request) {
         $q = Input::get('q');
@@ -295,14 +321,10 @@ class BioProductsController extends Controller
     // View Cart
     public function Cart() {
         // $session_id = $_COOKIE['session_id'];
-        if(Auth::check()) {
-            $user_id = Auth::User()->id;
-            $usercart = DB::table('cart')->where(['user_id' => $user_id])->get();
-        } else {
-            $session_id = Session::get('session_id');
-            $usercart = DB::table('cart')->where(['session_id' => $session_id])->get();
-        }
-
+        
+        $session_id = Session::get('session_id');
+        $usercart = DB::table('cart')->where(['session_id' => $session_id])->get();
+        
         foreach($usercart as $key => $product) {
             // echo $product->product_id; die;
             $productdetails = BioProduct::where('id', $product->product_id)->first();
@@ -355,6 +377,8 @@ class BioProductsController extends Controller
             } else {
                 $totalamount = $data['totalamount'];
             }
+
+            $order_id = str_random(10);
             $order = new Order;
             $order->user_id = $user_id;
             $order->user_email = $user_email;
@@ -362,10 +386,11 @@ class BioProductsController extends Controller
             $order->delivery = $data['delivery']; 
             $order->totalamount = $totalamount;
             $order->status = "New";
+            $order->order_id = $order_id;
             $order->additional_info = $additional_info;
             $order->save();
 
-            $order_id = str_random(10);
+            
             $cartProducts = DB::table('cart')->where(['user_id' => $user_id])->get();
             foreach ($cartProducts as $cartProduct) {
                 $cartProductOrder = new OrderProduct;
@@ -375,6 +400,7 @@ class BioProductsController extends Controller
                 $cartProductOrder->product_name = $cartProduct->product_name;
                 $cartProductOrder->product_price = $cartProduct->price;
                 $cartProductOrder->product_qty = $cartProduct->quantity;
+                $cartProductOrder->status = "New";
                 $cartProductOrder->save();
 
                 Session::put('order_id', $order_id);
@@ -408,8 +434,6 @@ class BioProductsController extends Controller
         return view('products.thankyou');
     }
 
-    public function userOrders() {
-        return view('users.orders');
-    }
+    
 }
 

@@ -873,7 +873,8 @@ button.compare {
 
 }
 
-.cart table tbody {
+.cart table tbody,
+.table-order {
     counter-reset: Serial;
 }
 
@@ -886,7 +887,8 @@ button.compare {
     text-transform: capitalize;
 }
 
-.cart table tbody td:first-child:before {
+.cart table tbody td:first-child:before,
+.table-order td:first-child:before {
     counter-increment: Serial;
     content: counter(Serial);
 }

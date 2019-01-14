@@ -32,12 +32,7 @@
       </ul> 
     </li> 
 
-    {{-- <li class="submenu"> <a href="#"><i class="icon icon-shopping-cart"></i> <span>Orders</span> </a>
-      <ul>
-        <li><a href="#">All Orders</a></li>
-        <li><a href="#">Add Order</a></li>
-      </ul> 
-    </li>  --}}
+    <li  <?php if (preg_match("/orders/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/admin/orders')}}"><i class="icon icon-shopping-cart"></i> All Orders</a></li>
 
     <li <?php if (preg_match("/quotes/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/admin/quotes')}}"><i class="icon icon-home"></i> <span>Quotes</span></a> </li>
 
