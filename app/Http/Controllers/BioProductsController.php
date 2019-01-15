@@ -365,7 +365,7 @@ class BioProductsController extends Controller
 
         if($request->isMethod('post')) {
             $data = $request->all();
-
+            
             if(empty($data['additional_info'])) {
                 $additional_info = '';
             } else {
@@ -398,13 +398,32 @@ class BioProductsController extends Controller
                 $cartProductOrder->user_id = $user_id;
                 $cartProductOrder->product_id = $cartProduct->product_id;
                 $cartProductOrder->product_name = $cartProduct->product_name;
-                $cartProductOrder->product_price = $cartProduct->price;
+                $cartProductOrder->product_price = $cartProduct->price * $cartProduct->quantity;
                 $cartProductOrder->product_qty = $cartProduct->quantity;
                 $cartProductOrder->status = "New";
                 $cartProductOrder->save();
 
                 Session::put('order_id', $order_id);
             }
+
+            // Email User upon completion of order
+            $order_id = Session::get('order_id');
+            $orders = DB::table('orders')->where(['order_id' => $order_id])->get();
+            $user_id = Auth::user()->id;
+            $userdetails = User::find($user_id);
+            $orderproducts = DB::table('order_products')->where(['order_id' => $order_id])->get();
+            $email = $userdetails->email;
+
+            \Mail::send('emails.order', 
+                        [
+                            'userdetails' => $userdetails,
+                            'orderproducts' => $orderproducts,
+                            'orders' => $order
+                        ], 
+                        function ($message) use($email)  {
+                            $message->from('info@biofinder.ga', 'Biofinder Plus Team');
+                            $message->to($email);
+                        });
 
             return redirect()->action('BioProductsController@OrderReview');
         }

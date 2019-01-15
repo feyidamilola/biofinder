@@ -36,8 +36,28 @@ class UsersController extends Controller
 
                 $user->password = bcrypt($data['password']);
                 $user->save(); 
+
                 if(Auth::attempt(['email'=>$data['email-add'],'password'=>$data['password']])) {
                     Session::put('frontSession', $data['email-add']);
+
+                    // Email user upon signup
+
+                    $title = $request->input('title');
+                    $username = $request->input('name');
+                    $content = $request->input('content');
+                    $email = $request->input('email-add');
+
+                    \Mail::send('emails.send', 
+                                [
+                                    'title' => 'New User Registration', 
+                                    'username' => $username,
+                                    'content' => 'Thank you for signing up on our platform.'
+                                ], 
+                                function ($message) use($email)  {
+                                    $message->from('info@biofinder.ga', 'Biofinder Plus Team');
+                                    $message->to($email);
+                                });
+                    
                     return redirect('/profile');
                 }
             }
