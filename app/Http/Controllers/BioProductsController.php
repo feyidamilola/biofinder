@@ -249,6 +249,27 @@ class BioProductsController extends Controller
             
             OrderProduct::where(['order_id' => $order_id])->update(['status' => $orderstatus]);
             Order::where(['order_id' => $order_id])->update(['status' => $orderstatus]);
+
+            // Email customer for order status update
+            $orders = DB::table('orders')->where(['order_id' => $order_id])->first();
+            $user_id = $orders->user_id;
+            // echo '<pre>'; print_r($user_id); die;
+
+            $userdetails = User::find($user_id);
+            $orderproducts = DB::table('order_products')->where(['order_id' => $order_id])->get();
+            $email = $userdetails->email;
+
+            \Mail::send('emails.orderupdate', 
+                        [
+                            'userdetails' => $userdetails,
+                            'orderproducts' => $orderproducts,
+                            'orders' => $orders
+                        ], 
+                        function ($message) use($email)  {
+                            $message->from('info@biofinder.ga', 'Order Update - Biofinder Plus Team');
+                            $message->to($email);
+                        });
+                        
             return back()->with('flash_message_success', 'Your order has been updated');
 
         }

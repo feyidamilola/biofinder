@@ -42,16 +42,12 @@ class UsersController extends Controller
 
                     // Email user upon signup
 
-                    $title = $request->input('title');
                     $username = $request->input('name');
-                    $content = $request->input('content');
                     $email = $request->input('email-add');
 
                     \Mail::send('emails.new', 
                                 [
-                                    'title' => 'New User Registration', 
-                                    'username' => $username,
-                                    'content' => 'Thank you for signing up on our platform.'
+                                    'username' => $username
                                 ], 
                                 function ($message) use($email)  {
                                     $message->from('info@biofinder.ga', 'Biofinder Plus Team');
