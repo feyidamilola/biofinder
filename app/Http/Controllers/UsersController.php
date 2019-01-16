@@ -47,7 +47,7 @@ class UsersController extends Controller
                     $content = $request->input('content');
                     $email = $request->input('email-add');
 
-                    \Mail::send('emails.send', 
+                    \Mail::send('emails.new', 
                                 [
                                     'title' => 'New User Registration', 
                                     'username' => $username,
@@ -122,7 +122,7 @@ class UsersController extends Controller
             $user->state = $data['state'];
             $user->save();
             
-            return back()->with('flash_message_success', 'Your details have been update');
+            return back()->with('flash_message_success', 'Your details have been updated');
         }
         // echo "<pre>"; print_r($userDetails); die;
         return view('users.profile')->with(compact('userDetails'));

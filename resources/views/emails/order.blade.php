@@ -34,7 +34,7 @@
 												<tbody>
 												<tr>
 													<td style="padding-left: 0px; padding-right: 8px; font-size: 16px; color: #757575; line-height: 100%; padding-top: 16px; font-family: 'Open Sans', Arial, sans-serif !important; font-weight: 400 !important;" align="center" valign="top">
-														<a href="http://biofinderplus.com/" style="display: inline-block; text-decoration: none;">
+														<a href="{{ url('/')}}" style="display: inline-block; text-decoration: none;">
 														<img src="http://biofinderplus.ga/images/frontend_images/logo.png" alt="Biofinder Plus" width="370" style="width: auto; height: 32px; max-width: 200px; vertical-align: middle;">
 														</a>
 													</td>
@@ -67,7 +67,7 @@
 													<table role="presentation" align="center" border="0" cellspacing="0" cellpadding="0" style="display: table; margin-left: auto; margin-right: auto; text-align: center;">
 														<tbody>
 															<tr>
-															<td style="font-size: 15px; font-weight: bold; line-height: 22px; mso-line-height-rule: exactly; border-radius: 0px; padding: 0;" align="center" bgcolor="#1c92ad"><a href="http://biofinderplus.ga/orders" target="_blank" style="font-weight: 700 !important; text-decoration: none; color: #a7b1b6; font-family: 'Open Sans', Arial, sans-serif !important; display: block !important; line-height: 26px !important; padding: 11px 24px;"><span style="color: #ffffff; font-family: 'Open Sans', Arial, sans-serif !important; font-weight: 700 !important; display: block !important; text-align: center !important; vertical-align: top !important; line-height: inherit !important; text-transform: uppercase;">View your order</span></a></td>
+															<td style="font-size: 15px; font-weight: bold; line-height: 22px; mso-line-height-rule: exactly; border-radius: 0px; padding: 0;" align="center" bgcolor="#1c92ad"><a href="{{ url('/orders')}}" target="_blank" style="font-weight: 700 !important; text-decoration: none; color: #a7b1b6; font-family: 'Open Sans', Arial, sans-serif !important; display: block !important; line-height: 26px !important; padding: 11px 24px;"><span style="color: #ffffff; font-family: 'Open Sans', Arial, sans-serif !important; font-weight: 700 !important; display: block !important; text-align: center !important; vertical-align: top !important; line-height: inherit !important; text-transform: uppercase;">View your order</span></a></td>
 															</tr>
 														</tbody>
 													</table>
@@ -198,8 +198,8 @@
 										</table>
 									</td>
 									</tr>
-									<tr>
-									<td style="padding-left: 8px; padding-right: 8px; font-size: 0 !important; line-height: 100%;" align="left" bgcolor="#ffffff">
+									<tr style="">
+									<td style="padding-left: 8px; padding-right: 8px; font-size: 0 !important; line-height: 100%; width:100%; margin-bottom: 30px;" align="left" bgcolor="#ffffff">
 										<!--[if (mso)|(IE)]>
 										<table role="presentation" width="624" border="0" cellspacing="0" cellpadding="0" align="center" style="vertical-align:top;width:624px;margin:0 auto;">
 											<tbody>
@@ -227,7 +227,7 @@
 									</div>
 									
 									</td>
-									<td style="padding-left: 8px; padding-right: 8px; font-size: 0 !important; line-height: 100%; padding-bottom: 16px;" align="center" bgcolor="transparent">
+									<td style="padding-left: 8px; padding-right: 8px; font-size: 0 !important; line-height: 100%; padding-bottom: 16px; width:100%;" align="center" bgcolor="transparent">
 										<table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="width: 100%; min-width: 0 !important;">
 											<tbody>
 												<tr>
@@ -240,7 +240,6 @@
 														<a href="#" style="color: #b3b3b3; display: inline-block; text-decoration: none;">&nbsp;<img src="https://cdn.shopify.com/s/files/1/0014/8530/7965/files/facebook.png?10164563408428775342" width="24" height="24" alt="Facebook" style="max-width: 24px; width: 24px; height: 24px; vertical-align: middle;">&nbsp;</a>
 														<a href="#" style="color: #b3b3b3; display: inline-block; text-decoration: none;">&nbsp;<img src="https://cdn.shopify.com/s/files/1/0014/8530/7965/files/twitter.png?10164563408428775342" width="24" height="24" alt="Twitter" style="max-width: 24px; width: 24px; height: 24px; vertical-align: middle;">&nbsp;</a>
 														<a href="#" style="color: #b3b3b3; display: inline-block; text-decoration: none;">&nbsp;<img src="https://cdn.shopify.com/s/files/1/0014/8530/7965/files/instagram.png?10164563408428775342" width="24" height="24" alt="Instagram" style="max-width: 24px; width: 24px; height: 24px; vertical-align: middle;">&nbsp;</a>
-														<a href="#" style="color: #b3b3b3; display: inline-block; text-decoration: none;">&nbsp;<img src="https://cdn.shopify.com/s/files/1/0014/8530/7965/files/pinterest.png?10164563408428775342" width="24" height="24" alt="Pinterest" style="max-width: 24px; width: 24px; height: 24px; vertical-align: middle;">&nbsp;</a>
 													</p>
 												</td>
 												</tr>

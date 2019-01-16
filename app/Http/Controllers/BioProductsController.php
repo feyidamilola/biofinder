@@ -365,7 +365,27 @@ class BioProductsController extends Controller
 
         if($request->isMethod('post')) {
             $data = $request->all();
-            
+
+            if(empty($data['name'])) {
+                return back()->with('flash_message_error', 'Your name cannot be empty');
+            }
+
+            if(empty($data['email'])) {
+                return back()->with('flash_message_error', 'Your email cannot be empty');
+            }
+
+            if(empty($data['phone'])) {
+                return back()->with('flash_message_error', 'Your phone number cannot be empty');
+            }
+
+            if(empty($data['address'])) {
+                return back()->with('flash_message_error', 'Your address cannot be empty');
+            }
+
+            if(empty($data['state'])) {
+                return back()->with('flash_message_error', 'Your state cannot be empty');
+            }
+
             if(empty($data['additional_info'])) {
                 $additional_info = '';
             } else {
@@ -388,8 +408,14 @@ class BioProductsController extends Controller
             $order->status = "New";
             $order->order_id = $order_id;
             $order->additional_info = $additional_info;
+
+            // DB::table('users')->where(['user_id'=>$user_id])->update([
+            //     'name'=> $user_id
+            //     ]);
+
             $order->save();
 
+            
             
             $cartProducts = DB::table('cart')->where(['user_id' => $user_id])->get();
             foreach ($cartProducts as $cartProduct) {
