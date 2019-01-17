@@ -14,16 +14,16 @@
  					</li>
  					<li> 
  						<a href="{{ url('/products')}}">product</a>
- 					</li>
+					</li>
+					<li> 
+						<a href="{{ url('/vendors')}}">vendors</a>
+					</li>
  					<li> 
  						<a href="#">articles</a>
  					</li>
  					<li> 
- 						<a href="#">videos</a>
- 					</li>
- 					<li> 
- 						<a href="#">more</a>
- 					</li>
+						<a href="#">about us</a>
+					</li>
  				</ul>
  			</div>
  			<div>
@@ -44,9 +44,6 @@
 				</a>
 				<a href="#">
 					<i class="fa fa-instagram"></i>
-				</a>
-				<a href="#">
-					<i class="fa fa-youtube"></i>
 				</a>
 			</div>
  		</div>

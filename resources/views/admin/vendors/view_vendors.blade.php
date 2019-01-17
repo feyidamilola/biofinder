@@ -34,6 +34,7 @@
                   <th>Date Created</th>
                   <th>Vendors</th>
                   <th>Address</th>
+                  <th>Status</th>
                   <th>Phone Number</th>
                   <th>Actions</th>
                 </tr>
@@ -45,6 +46,13 @@
                         <td>{{$vendor->created_at}}</td>
                         <td>{{$vendor->vendor_name}}</td>
                         <td>{!!$vendor->address!!}</td>
+                        <td>
+                          @if ($vendor->enable == 1)
+                              Active
+                          @else
+                              Inactive
+                          @endif
+                        </td>
                         <td>{{$vendor->phone_number}}</td>
                         <td class="text-center">
                             <a href="{{url('/admin/edit-vendor/'.$vendor->id)}}" class="btn btn-primary btn-mini"> Edit </a> | 

@@ -28,8 +28,8 @@
 /* Carousel base class */
 .carousel {
   height: 75vh;
-  margin-bottom: 15px;
-  margin-top: 65px;
+  margin-bottom: 0px;
+  margin-top: 55px;
 }
 
 .carousel-caption {

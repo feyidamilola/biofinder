@@ -258,7 +258,7 @@ class BioProductsController extends Controller
             $userdetails = User::find($user_id);
             $orderproducts = DB::table('order_products')->where(['order_id' => $order_id])->get();
             $email = $userdetails->email;
-
+ 
             \Mail::send('emails.orderupdate', 
                         [
                             'userdetails' => $userdetails,

@@ -34,6 +34,7 @@
                   </li>
                 </ul>
             </li>
+            <li><a href="#">articles</a></li>
             
             <li class="dropdown menu-quote">
               <a href="#" class="dropdown-toggle quote" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">get quote</a>

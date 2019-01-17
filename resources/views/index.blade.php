@@ -198,7 +198,7 @@
     <!-- /Video -->
 
     <!-- Articles -->
-      <div class="container margin-bottom-30">
+      {{-- <div class="container margin-bottom-30">
         <div class="full-width">
           <div class="col-md-12">
             <h2 class="title">
@@ -279,7 +279,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
       {{-- <div class="container margin-bottom-60">
         <hr class="col-md-12">
       </div> --}}
