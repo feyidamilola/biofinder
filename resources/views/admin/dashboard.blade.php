@@ -12,83 +12,142 @@
   <div class="container-fluid">
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
-        <li class="bg_lb"> <a href="#"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> Products </a> </li>
-        <li class="bg_lg span3"> <a href="#"> <i class="icon-signal"></i> Vendors</a> </li>
-        <li class="bg_ly"> <a href="#"> <i class="icon-inbox"></i><span class="label label-success">101</span> Categories </a> </li>
-        {{-- <li class="bg_lo"> <a href="#"> <i class="icon-th"></i> Tables</a> </li> --}}
-        {{-- <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li> --}}
+        
+        <li class="bg_lo span3"> <a href="{{ url('/admin/orders')}}"> <i class="icon-shopping-cart"></i> Orders</a> </li>
+        <li class="bg_ls"> <a href="{{ url('/admin/all-products')}}"> <i class="icon icon-shopping-cart"></i> Products</a> </li>
+        <li class="bg_lb"> <a href="{{ url('/admin/all-vendors')}}"> <i class="icon icon-globe"></i>Vendors</a> </li>
+        <li class="bg_lg"> <a href="{{ url('/admin/quotes')}}"> <i class="icon-home"></i> Quotes</a> </li>
+        <li class="bg_ls"> <a href="{{ url('/admin/all-services')}}"> <i class="icon-info-sign"></i> Services</a> </li>
 
       </ul>
     </div>
 <!--End-Action boxes-->    
 
-<!--Chart-box-->    
-    {{-- <div class="row-fluid">
-      <div class="widget-box">
-        <div class="widget-title bg_lg"><span class="icon"><i class="icon-signal"></i></span>
-          <h5>Site Analytics</h5>
-        </div>
-        <div class="widget-content" >
-          <div class="row-fluid">
-            <div class="span9">
-              <div class="chart"></div>
-            </div>
-            <div class="span3">
-              <ul class="site-stats">
-                <li class="bg_lh"><i class="icon-user"></i> <strong>2540</strong> <small>Total Users</small></li>
-                <li class="bg_lh"><i class="icon-plus"></i> <strong>120</strong> <small>New Users </small></li>
-                <li class="bg_lh"><i class="icon-shopping-cart"></i> <strong>656</strong> <small>Total Shop</small></li>
-                <li class="bg_lh"><i class="icon-tag"></i> <strong>9540</strong> <small>Total Orders</small></li>
-                <li class="bg_lh"><i class="icon-repeat"></i> <strong>10</strong> <small>Pending Orders</small></li>
-                <li class="bg_lh"><i class="icon-globe"></i> <strong>8540</strong> <small>Online Orders</small></li>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="widget-box">
+          <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG2"><span class="icon"><i class="icon-chevron-down"></i></span>
+            <h5>Orders</h5>
+          </div>
+          <div class="widget-content nopadding collapse in" id="collapseG2">
+              <table class="table table-bordered data-table">
+                  <thead>
+                      <tr>
+                          <th>S/N </th>
+                          <th>Date</th>
+                          <th>Customer Email</th>
+                          <th>Order Id</th>
+                          <th>Payment Method</th>
+                          <th>Amount</th>
+                          <th>Delivery</th>
+                          <th>Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody class="table-counter">
+                      @foreach ($orders as $order)
+                          <tr class="gradeX">
+                              <td></td>
+                              <td>{{$order->created_at}}</td>
+                              <td>{{$order->user_email}}</td>
+                              <td>{{$order->order_id}}</td>
+                              <td>{{$order->payment}}</td>
+                              <td>{{$order->totalamount}}</td>
+                              <td>{{$order->delivery}}</td>
+                              <td>
+                                  <a href="#{{$order->order_id}}" data-toggle="modal">View Order</a>
+                               </td>
+                              </form>
+                          </tr>
+                      @endforeach
+                  </tbody>
+              </table>
+              <ul class="recent-posts">
+                <li>
+                  <a href="{{ url('/admin/orders')}}" class="btn btn-warning btn-mini">View All</a>
+                </li>
               </ul>
             </div>
-          </div>
         </div>
       </div>
-    </div> --}}
-<!--End-Chart-box--> 
-    {{-- <hr/>
+      
+    </div>
     <div class="row-fluid">
       <div class="span6">
         <div class="widget-box">
           <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG2"><span class="icon"><i class="icon-chevron-down"></i></span>
-            <h5>Latest Posts</h5>
+            <h5>Quotes</h5>
           </div>
           <div class="widget-content nopadding collapse in" id="collapseG2">
+              <table class="table table-bordered data-table">
+                  <thead>
+                      <tr>
+                          <th>S/N </th>
+                          <th>Product Name</th>
+                          <th>Category</th>
+                          <th>Email Address</th>
+                      </tr>
+                  </thead>
+                  <tbody class="table-counter">
+                      @foreach ($quotes as $quote)
+                          <tr class="gradeX">
+                              <td></td>
+                              <td>{{$quote->product_name}}</td>
+                              <td>{{$quote->category}}</td>
+                              <td>{{$quote->email}}</td>
+                          </tr>
+                      @endforeach
+                  </tbody>
+              </table>
             <ul class="recent-posts">
               <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="{{ asset('images/backend_images/demo/av1.jpg') }}"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="{{ asset('images/backend_images/demo/av2.jpg') }}"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="{{ asset('images/backend_images/demo/av4.jpg') }}"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.Itaffle to pad out the comment.</a> </p>
-                </div>
-              <li>
-                <button class="btn btn-warning btn-mini">View All</button>
+                <a href="{{ url('/admin/quotes')}}" class="btn btn-warning btn-mini">View All</a>
               </li>
             </ul>
           </div>
         </div>
         
       </div>
-
-    </div> --}}
+      <div class="span6">
+        <div class="widget-box">
+          <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG2"><span class="icon"><i class="icon-chevron-down"></i></span>
+            <h5>New Vendor Applicant</h5>
+          </div>
+          <div class="widget-content nopadding collapse in" id="collapseG2">
+              <table class="table table-bordered data-table">
+                  <thead>
+                    <tr>
+                      <th>S/N </th>
+                      <th>Vendors</th>
+                      <th>Address</th>
+                      <th>Phone </th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-counter">
+                    @foreach ($vendors as $vendor)
+                        <tr class="gradeX">
+                            <td></td>
+                            <td>{{$vendor->vendor_name}}</td>
+                            <td>{!!$vendor->address!!}</td>
+                            <td>{{$vendor->phone_number}}</td>
+                            <td class="text-center">
+                                <a href="{{url('/admin/edit-vendor/'.$vendor->id)}}" class="btn btn-primary btn-mini"> Approve </a>                             
+                            </td>
+                        </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+            <ul class="recent-posts">
+              
+              <li>
+                <a class="btn btn-warning btn-mini" href="{{ url('/admin/new-vendors')}}">View All</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+      </div>
+    </div>
   </div>
 </div>
 

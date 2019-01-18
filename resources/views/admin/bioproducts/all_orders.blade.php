@@ -23,6 +23,7 @@
                                 <thead>
                                     <tr>
                                         <th>S/N </th>
+                                        <th>Date</th>
                                         <th>Customer Email</th>
                                         <th>Order Id</th>
                                         <th>Payment Method</th>
@@ -37,6 +38,7 @@
                                     @foreach ($orders as $order)
                                         <tr class="gradeX">
                                             <td></td>
+                                            <td>{{$order->created_at}}</td>
                                             <td>{{$order->user_email}}</td>
                                             <td>{{$order->order_id}}</td>
                                             <td>{{$order->payment}}</td>

@@ -36,43 +36,14 @@
 
     <li <?php if (preg_match("/quotes/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/admin/quotes')}}"><i class="icon icon-home"></i> <span>Quotes</span></a> </li>
 
-    <li class="submenu"> <a href="#"><i class="icon icon-cog"></i> <span>Services/Solutions</span> </a>
+    <li class="submenu"> <a href="#"><i class="icon icon-info-sign"></i> <span>Services/Solutions</span> </a>
       <ul <?php if (preg_match("/service/i", $url)) { ?>  style="display:block;" <?php } ?>>
         <li  <?php if (preg_match("/all-services/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/admin/all-services')}}">All Services</a></li>
         <li  <?php if (preg_match("/create-service/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/admin/create-service')}}">Add Service</a></li>
       </ul>
     </li>
 
-    {{-- <li class="submenu"> <a href="#"><i class="icon icon-folder-open"></i> <span>Articles</span> </a>
-      <ul>
-        <li><a href="#">All Articles</a></li>
-        <li><a href="#">Add Article</a></li>
-      </ul>
-    </li> --}}
-
-    {{-- <li class="submenu"> <a href="#"><i class="icon icon-group"></i> <span>Users</span> </a>
-      <ul>
-        <li><a href="#">All Users</a></li>
-        <li><a href="#">Add Article</a></li>
-      </ul>
-    </li>
-
-    <li class="submenu"> <a href="#"><i class="icon icon-pencil"></i> <span>Reviews</span> </a>
-      <ul>
-        <li><a href="#">All Reviews</a></li>
-        <li><a href="#">Add Review</a></li>
-      </ul>
-    </li> --}}
-
-    <li class="submenu"> <a href="#"><i class="icon icon-align-justify"></i> <span>Pages</span> </a>
-      <ul <?php if (preg_match("/page/i", $url)) { ?>  style="display:block;" <?php } ?>>
-        {{-- <li><a href="#">All Pages</a></li>
-        <li><a href="#">Add Page</a></li> --}}
-        
-      </ul>
-    </li>
-    <li  <?php if (preg_match("/banner/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/admin/all-banners')}}">Homepage Banner</a></li>
-    {{-- <li> <a href="{{ url('/admin/social-links')}}"><i class="icon icon-share"></i> <span>Social Media Links</span> </a></li> --}}
+    <li  <?php if (preg_match("/banner/", $url)) { ?>  class="active" <?php } ?>><a href="{{ url('/admin/all-banners')}}"><i class="icon icon-camera"></i> Homepage Banner</a></li>
   </ul>
 </div>
 <!--sidebar-menu-->

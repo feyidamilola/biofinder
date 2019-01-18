@@ -168,7 +168,7 @@ class BioProductsController extends Controller
     }
 
     public function viewFrontendProducts(Request $request){
-        $bioproducts = BioProduct::orderBy('created_at', 'desc')->where('status', 1 )->paginate(10);;
+        $bioproducts = BioProduct::orderBy('created_at', 'desc')->where('status', 1 )->paginate(10);
 
         $vendors = Vendor::where('enable', 1)->get();
         $subcategories = SubCategories::get();
@@ -231,7 +231,7 @@ class BioProductsController extends Controller
     }
 
     public function allorders(Request $request){
-        $orders = Order::get();
+        $orders = Order::orderBy('created_at', 'DESC' )->get();
         foreach ($orders as $key) {
             $orderproducts = OrderProduct::where("order_id",$key->order_id)->get();
             

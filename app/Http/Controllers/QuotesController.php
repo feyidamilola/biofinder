@@ -34,9 +34,6 @@ class QuotesController extends Controller
                         });
 
             $quote->save();
-
-
-            
             return back()->with('flash_message_success', 'Quote will be sent to your email');
         }
 

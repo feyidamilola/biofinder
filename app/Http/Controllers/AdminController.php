@@ -4,6 +4,11 @@ use Illuminate\Http\Request;
 use Auth;
 use Session;
 use App\User;
+use App\Order;
+use App\OrderProduct;
+use App\Bioproduct;
+use App\Quote;
+use App\Vendor;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -21,6 +26,8 @@ class AdminController extends Controller
         // 	}
     	// }
         // return view('admin.admin_login');
+
+        
         
         return redirect('/admin/dashboard');
     }
@@ -32,7 +39,20 @@ class AdminController extends Controller
             //return redirect()->action('AdminController@login')->with('flash_message_error', 'Please Login');
             return redirect('/admin')->with('flash_message_error','Please Login');
         }*/
-        return view('admin.dashboard');
+
+        $orders = Order::where('status', 'New')->orderBy('created_at', 'DESC' )->paginate(5);
+        foreach ($orders as $key) {
+            $orderproducts = OrderProduct::where("order_id",$key->order_id)->get();
+            $order = Order::where("order_id",$key->order_id)->get();
+            
+            foreach($orderproducts as $key) {
+                $vendors = Bioproduct::where('id', $key->product_id)->get();
+            }
+            $userdetails = User::where('id', $key->user_id)->get();
+        }
+        $quotes = Quote::paginate(5);
+        $vendors = Vendor::where('enable', 0)->paginate(5);
+        return view('admin.dashboard')->with(compact('orders', 'quotes', 'vendors'));
     }
 
     public function settings(){
