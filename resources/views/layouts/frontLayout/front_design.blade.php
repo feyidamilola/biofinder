@@ -12,12 +12,12 @@
     <link href="{{ asset('css/frontend_css/prettyPhoto.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend_css/price-range.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend_css/animate.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/frontend_css/responsive.css') }}" rel="stylesheet">
 
     
     <link href="{{ asset('css/frontend_css/carousel.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend_css/site.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend_css/user.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/frontend_css/responsive.css') }}" rel="stylesheet">
 
 
     <!--[if lt IE 9]>

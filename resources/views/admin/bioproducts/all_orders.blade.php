@@ -51,8 +51,8 @@
                                                     <select name="order_status" id="order_status">
                                                         <option value="{{$order->status}}">{{$order->status}}</option>
                                                         <option value="new">New</option>
-                                                        <option value="shipped">shipped</option>
-                                                        <option value="completed">completed</option>
+                                                        <option value="shipped">Shipped</option>
+                                                        <option value="completed">Completed</option>
                                                     </select>
                                                 </td>
                                                 <td>
