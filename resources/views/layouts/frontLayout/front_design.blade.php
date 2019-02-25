@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <title>Biofinder Plus</title>
     <link href="{{ asset('css/frontend_css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/frontend_css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link href="{{ asset('css/frontend_css/prettyPhoto.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend_css/price-range.css') }}" rel="stylesheet">
